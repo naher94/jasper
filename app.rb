@@ -40,42 +40,19 @@ client = Twilio::REST::Client.new ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TO
 get '/incoming_sms' do
   
   session["last_context"] ||= nil
-  
   sender = params[:From] || ""
   body = params[:Body] || ""
-  
   
   #"Hello" -> "hello"
   #"Hllo  helo " -> "hllo helo " -> "hllo helo"
   #"HELLO" -> "hello"
-  
   body = body.downcase.strip
   
   message = decide_response( body )
   
-  
-  my_array = ["item 1", "item 2", "item 3", "item 4"]
-  
-  my_array.each do |message|
-    puts message.to_s
+  if body == "hi"
+    message = get_greeting
   end
-  
-  message_string = ""
-  
-  my_array.each_with_index do | str, id |
-    
-    # str = "item 1"
-    # index = 0
-    
-    message_string = message_string + "\n " + str.to_s
-
-  end 
-  
-  # 0 "item 1"
-  # 1 "item 1 item 2"
-  # 2 "item 1 item 2 item 3"
-
-  return message_string
   
   
   
@@ -87,9 +64,15 @@ get '/incoming_sms' do
   return twiml.text
 end
 
+# ----------------------------------------------------------------------
+#   METHODS
+#   Add any custom methods below
+# ----------------------------------------------------------------------
 
 private 
 
+
+#what does this do??
 
 def decide_response blob
   
