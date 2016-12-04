@@ -53,7 +53,17 @@ get '/incoming_sms' do
   if body == "hi"
     message = get_greeting
   end
+
+  # how do i make this time based? rather than the user asking for it??
+  if body == "color"
+    message = color_of_the_day
+  end
   
+  #should actually be any form of CONFIRMATIONS
+  #which YES or NO is it? context aware use sessions to do this?
+  if body == "yes"
+    message = show_images
+  end
   
   
       
@@ -91,7 +101,7 @@ def decide_response blob
 end 
 
 
-
+CONFIRMATIONS = ["Yes","Yup","Totally","Totes","👍"]
 
 GREETINGS = ["Hi","Yo", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hola", "Bonjour", "Hallo", "Ciao", "Konnichiwa"]
 
@@ -108,12 +118,28 @@ def get_greeting
 end
 
 def get_about_message
-  get_greeting + ", I\'m SMSBot 🤖. " + get_commands
+  get_greeting + ", I\'m Jasper 🤖. " + get_commands
 end
 
 def get_help_message
   "You're stuck, eh? " + get_commands
 end
+
+
+
+
+def color_of_the_day
+  "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for 'Powerful, Dynamic & Introspective' " + "swatchPlaceHolder.png" + "Want images using canton?"
+end
+
+def show_images
+  #create more than 1 greeting
+  "Awesome Sauce! Give me a second." + "inspo1.jpeg" + "inspo2.jpeg"
+end
+
+
+
+
 
 def error_response
   error_prompt = ["I didn't catch that.", "Hmmm I don't know that word.", "What did you say to me? "].sample
