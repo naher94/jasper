@@ -1,11 +1,11 @@
-# ColorBot
+# Jasper
 Inject color inspiration
 
 ## Proposal
 
 ### tl;dr
 
-ColorBot is a color tool to expand your color vocabulary and provide a new form of inspiration for all. 
+Jasper is a color tool to expand your color vocabulary and provide a new form of inspiration for all. 
 
 ### Full Description
 
@@ -26,8 +26,8 @@ Sadnote: Pantone does not store a list of all there daily colors, only the name 
 
 ## Workflow Diagram
 
-![ColorBot Workflow Diagram](colorBotWorkflowDiagramUpdated.png)
+![Jasper Workflow Diagram](colorBotWorkflowDiagramUpdated.png)
 
 ## Data Structure Diagram
 
-![ColorBot Data Structure Diagram](colorBotDataStructure.png)
+![Jasper Data Structure Diagram](colorBotDataStructure.png)
