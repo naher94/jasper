@@ -48,7 +48,7 @@ get '/incoming_sms' do
   #"HELLO" -> "hello"
   body = body.downcase.strip
   
-  message = decide_response( body )
+  #message = decide_response( body )
   
   if body == "hi"
     message = get_greeting
@@ -88,23 +88,23 @@ end
 private 
 
 
-#what does this do??
+#This might be a good idea to have!!!!!!!!!
 
-def decide_response blob
+# def decide_response blob
   
-  #return "I didn't understand"
+#   #return "I didn't understand"
   
-  if blob == "skills"
-    "My skills are  x , y , z "
-  elsif blob == "availability"  
-    "I'm available for hire now"
-  elsif blob == "something else "  
-    "Something else"
-  else
-    return "I didn't understand"
-  end 
+#   if blob == "skills"
+#     "My skills are  x , y , z "
+#   elsif blob == "availability"  
+#     "I'm available for hire now"
+#   elsif blob == "something else "  
+#     "Something else"
+#   else
+#     return "I didn't understand"
+#   end 
   
-end 
+# end 
 
 
 CONFIRMATIONS = ["Yes","Yup","Totally","Totes","👍"]
@@ -124,12 +124,12 @@ def get_greeting
 end
 
 def get_about_message
-  get_greeting + ", I\'m Jasper 🤖. " + get_commands
+  get_greeting + ", I\'m Jasper, your little color 🎨 helper! " + get_commands
 end
 
-def get_help_message
-  "You're stuck, eh? " + get_commands
-end
+# def get_help_message
+#   "You're stuck, eh? " + get_commands
+# end
 
 def help
   "I’m pretty helpful at finding images for the color of the day and giving you the color of the day just type “colorize” to get today’s color and “history” to pull up colors from this past week :woot: :woot:"
@@ -158,8 +158,8 @@ def error
   
 end
 
-def error_response
-  error_prompt = ["I didn't catch that.", "Hmmm I don't know that word.", "What did you say to me? "].sample
-  error_prompt + " " + get_commands
-end
+# def error_response
+#   error_prompt = ["I didn't catch that.", "Hmmm I don't know that word.", "What did you say to me? "].sample
+#   error_prompt + " " + get_commands
+# end
 
