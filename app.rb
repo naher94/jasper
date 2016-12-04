@@ -29,62 +29,111 @@ enable :sessions
 #   heroku config:set TWILIO_ACCOUNT_SID=XXXXX 
 # for each environment variable
 
-# CREATE A CLient
 client = Twilio::REST::Client.new ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"]
-
-
-# Use this method to check if your ENV file is set up
-
-get "/from" do
-  #401
-  ENV["TWILIO_FROM"]
-end
-
-# Test sending an SMS
-# change the to to your number 
-
-get "/send_sms/" do 
-
-  client.account.messages.create(
-    :from => ENV["TWILIO_FROM"],
-    :to => "+1XXXXXXXXXXXX",
-    :body => "Hey there. This is a test"
-  )
-  "Sent message"
-  
-end
 
 # Hook this up to your Webhook for SMS/MMS through the console
 
-get '/incoming_sms' do
+#get '/incoming_sms/:id' do
 
-  session["counter"] ||= 0
-  count = session["counter"]
+# http://localhost/incoming_sms?query=Something&From=234234234
+
+get '/incoming_sms' do
+  
+  session["last_context"] ||= nil
   
   sender = params[:From] || ""
   body = params[:Body] || ""
-  query = body.downcase.strip
-
-  if session["counter"] < 1
-    message = "Thanks for your first message. From #{sender} saying #{body}"
-  else
-    message = "Thanks for message number #{ count }. From #{sender} saying #{body}"
+  
+  
+  #"Hello" -> "hello"
+  #"Hllo  helo " -> "hllo helo " -> "hllo helo"
+  #"HELLO" -> "hello"
+  
+  body = body.downcase.strip
+  
+  message = decide_response( body )
+  
+  
+  my_array = ["item 1", "item 2", "item 3", "item 4"]
+  
+  my_array.each do |message|
+    puts message.to_s
   end
   
-  session["counter"] += 1
+  message_string = ""
   
-  twiml = Twilio::TwiML::Response.new do |r|
-    r.Message message
-  end
-  twiml.text
+  my_array.each_with_index do | str, id |
+    
+    # str = "item 1"
+    # index = 0
+    
+    message_string = message_string + "\n " + str.to_s
 
+  end 
+  
+  # 0 "item 1"
+  # 1 "item 1 item 2"
+  # 2 "item 1 item 2 item 3"
+
+  return message_string
+  
+  
+  
+      
+  twiml = Twilio::TwiML::Response.new do |resp|
+    resp.Message message
+  end
+    
+  return twiml.text
 end
 
 
+private 
+
+
+def decide_response blob
+  
+  #return "I didn't understand"
+  
+  if blob == "skills"
+    "My skills are  x , y , z "
+  elsif blob == "availability"  
+    "I'm available for hire now"
+  elsif blob == "something else "  
+    "Something else"
+  else
+    return "I didn't understand"
+  end 
+  
+end 
 
 
 
-error 401 do 
-  "Not allowed!!!"
+
+GREETINGS = ["Hi","Yo", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hola", "Bonjour", "Hallo", "Ciao", "Konnichiwa"]
+
+COMMANDS = "hi, who, what, where, when, why and play."
+
+def get_commands
+  error_prompt = ["I know how to: ", "You can say: ", "Try asking: "].sample
+  
+  return error_prompt + COMMANDS
+end
+
+def get_greeting
+  return GREETINGS.sample
+end
+
+def get_about_message
+  get_greeting + ", I\'m SMSBot 🤖. " + get_commands
+end
+
+def get_help_message
+  "You're stuck, eh? " + get_commands
+end
+
+def error_response
+  error_prompt = ["I didn't catch that.", "Hmmm I don't know that word.", "What did you say to me? "].sample
+  error_prompt + " " + get_commands
 end
 
