@@ -65,7 +65,13 @@ get '/incoming_sms' do
     message = show_images
   end
   
-  
+  if body == "no"
+    message = no_images 
+  end
+
+  if body == "help"
+    message = help
+  end
       
   twiml = Twilio::TwiML::Response.new do |resp|
     resp.Message message
@@ -125,7 +131,10 @@ def get_help_message
   "You're stuck, eh? " + get_commands
 end
 
-
+def help
+  "I’m pretty helpful at finding images for the color of the day and giving you the color of the day just type “colorize” to get today’s color and “history” to pull up colors from this past week :woot: :woot:"
+  
+end
 
 
 def color_of_the_day
@@ -134,12 +143,20 @@ end
 
 def show_images
   #create more than 1 greeting
-  "Awesome Sauce! Give me a second." + "inspo1.jpeg" + "inspo2.jpeg"
+  ["Awesome Sauce! Give me a second.","#winning, one sec","Next stop inspiration 🚂"].sample + "inspo1.jpeg" + "inspo2.jpeg"
 end
 
+def no_images
+  "👋 Sounds good. Let me know if you would like images later on I’ll be happy to provide them. Happy Coloring! Ever need me, just type “Help” or “Colorize” and I’ll be waiting."
 
+def history
+  #pull up the last seven entries from db
+end
 
-
+def error
+  "Sorry I don't understand what you mean, type "help" for help."
+  
+end
 
 def error_response
   error_prompt = ["I didn't catch that.", "Hmmm I don't know that word.", "What did you say to me? "].sample
