@@ -48,6 +48,7 @@ get '/incoming_sms' do
   body = body.downcase.strip
   
   #message = decide_response( body )
+  message = "I didn't get that. " + help
   
   if body == "hi"
     message = get_greeting
