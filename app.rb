@@ -132,13 +132,13 @@ end
 # end
 
 def help
-  "I’m pretty helpful at finding images for the color of the day and giving you the color of the day just type “colorize” to get today’s color and “history” to pull up colors from this past week :woot: :woot:"
+  "I\'m pretty helpful at finding images for the color of the day and giving you the color of the day just type \"colorize\" to get today’s color and “history” to pull up colors from this past week :woot: :woot:"
   
 end
 
 
 def color_of_the_day
-  "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for 'Powerful, Dynamic & Introspective' " + "swatchPlaceHolder.png" + "Want images using canton?"
+  "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for \'Powerful, Dynamic & Introspective\' " + "swatchPlaceHolder.png" + "Want images using canton?"
 end
 
 def show_images
@@ -148,13 +148,14 @@ end
 
 def no_images
   "👋 Sounds good. Let me know if you would like images later on I’ll be happy to provide them. Happy Coloring! Ever need me, just type “Help” or “Colorize” and I’ll be waiting."
+end 
 
 def history
   #pull up the last seven entries from db
 end
 
 def error
-  "Sorry I don't understand what you mean, type "help" for help."
+  "Sorry I don't understand what you mean, type \"help\" for help."
   
 end
 
