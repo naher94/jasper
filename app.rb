@@ -133,7 +133,6 @@ end
 
 def help
   "I\'m pretty helpful at finding images for the color of the day and giving you the color of the day just type \"colorize\" to get today’s color and “history” to pull up colors from this past week :woot: :woot:"
-  
 end
 
 
