@@ -6,6 +6,12 @@ require 'sinatra/activerecord'
 require 'rake'
 require 'twilio-ruby'
 
+require 'open-uri'
+require 'nokogiri'
+
+require 'whenever'
+
+set :environment, :development
 # Load environment variables using Dotenv. If a .env file exists, it will
 # set environment variables from that file (useful for dev environments)
 configure :development do
@@ -13,6 +19,8 @@ configure :development do
   Dotenv.load
 end
 
+require_relative './models/image'
+require_relative './models/swatch'
 
 # enable sessions for this project
 
@@ -133,11 +141,16 @@ end
 
 def help
   "I\'m pretty helpful at finding images for the color of the day and giving you the color of the day just type \"colorize\" to get today’s color and “history” to pull up colors from this past week :woot: :woot:"
-  
 end
 
 
+# def color_of_the_day
+#   #JSON.load(s.themetic_words)
+#   "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for \'Powerful, Dynamic & Introspective\' " + "swatchPlaceHolder.png" + "Want images using canton?"
+# end
+
 def color_of_the_day
+  #JSON.load(s.themetic_words)
   "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for \'Powerful, Dynamic & Introspective\' " + "swatchPlaceHolder.png" + "Want images using canton?"
 end
 
@@ -163,4 +176,3 @@ end
 #   error_prompt = ["I didn't catch that.", "Hmmm I don't know that word.", "What did you say to me? "].sample
 #   error_prompt + " " + get_commands
 # end
-

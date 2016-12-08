@@ -10,34 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108064308) do
+ActiveRecord::Schema.define(version: 20161207071257) do
 
-  create_table "logs", force: :cascade do |t|
-    t.string   "from"
-    t.text     "message"
-    t.text     "response"
-    t.string   "context"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "images", force: :cascade do |t|
+    t.datetime "date"
+    t.string   "image"
   end
 
-  create_table "tracks", force: :cascade do |t|
-    t.string   "symbol"
-    t.text     "name"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.text     "name"
-    t.string   "phone_number"
-    t.string   "email_address"
-    t.boolean  "agreed_to_terms", default: false
-    t.boolean  "on_boarded",      default: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+  create_table "swatches", force: :cascade do |t|
+    t.datetime "date"
+    t.string   "name"
+    t.string   "hex"
+    t.string   "pantone"
+    t.string   "themetic_words"
   end
 
 end
