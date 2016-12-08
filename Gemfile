@@ -27,3 +27,5 @@ gem 'twilio-ruby'
 
 gem 'giphy'
 gem 'stock_quote'
+
+gem 'whenever', require: false
