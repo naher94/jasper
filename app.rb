@@ -6,6 +6,10 @@ require 'sinatra/activerecord'
 require 'rake'
 require 'twilio-ruby'
 
+require 'open-uri'
+require 'nokogiri'
+
+set :environment, :development
 # Load environment variables using Dotenv. If a .env file exists, it will
 # set environment variables from that file (useful for dev environments)
 configure :development do
@@ -13,6 +17,8 @@ configure :development do
   Dotenv.load
 end
 
+require_relative './models/image'
+require_relative './models/swatch'
 
 # enable sessions for this project
 
@@ -162,4 +168,33 @@ end
 #   error_prompt = ["I didn't catch that.", "Hmmm I don't know that word.", "What did you say to me? "].sample
 #   error_prompt + " " + get_commands
 # end
+
+def get_pantone_data
+  url = "https://www.pantone.com/colorstrology"
+  document = Nokogiri::HTML(open(url))
+
+  color = parse_pantone_color(document)
+  info = parse_pantone_info(document)
+  words = parse_pantone_words(document)
+
+  #{:pantone_words=>["UNUSUAL", "LEADER", "CREATIVE"], :pantone_color=>"#3D81AC", :pantone_name=>"Cendre Blue", :pantone_number=>"17-4131"}
+  return { pantone_words: words, pantone_color: color, pantone_name: info[:name], pantone_number: info[:number] }
+end
+
+def parse_pantone_color(document)
+  node = document.css('#ctl00_ctlDynamicControl1_plColorstrologyBackgroundPanel').first
+  color_style = node["style"].to_s
+  return color_style.gsub( "background-color:", "").gsub(";height:190px;width:190px;", "")
+end
+
+def parse_pantone_info(document)
+  node = document.css('.numLogon')
+  info_array = node.text.gsub(/\s/,',').split(",") - [""]
+  return { number: info_array[0], name: "#{ info_array[1] } #{ info_array[2] } #{ info_array[3] } #{ info_array[4] } #{ info_array[5] }".strip  }
+end
+
+def parse_pantone_words(document)
+  node = document.css('.keyLogon')
+  return node.first.text.gsub(/\s/,',').split(",") - [""]
+end
 

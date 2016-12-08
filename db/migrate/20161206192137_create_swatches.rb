@@ -1,6 +1,6 @@
-class Swatch < ActiveRecord::Migration[5.0]
+class CreateSwatches < ActiveRecord::Migration[5.0]
   def change
-  	create_table :swatch do |t|
+  	create_table :swatches do |t|
 
 	  	t.datetime :date
 	  	t.string :name
