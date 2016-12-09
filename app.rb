@@ -5,13 +5,12 @@ require "active_support/core_ext"
 require 'sinatra/activerecord'
 require 'rake'
 require 'twilio-ruby'
-
 require 'open-uri'
 require 'nokogiri'
-
 require 'whenever'
 
-set :environment, :development
+#set :environment, :development
+
 # Load environment variables using Dotenv. If a .env file exists, it will
 # set environment variables from that file (useful for dev environments)
 configure :development do
