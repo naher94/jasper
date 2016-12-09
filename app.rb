@@ -87,7 +87,7 @@ get '/incoming_sms' do
   # image_url = "http://rehansapp.heroku.com/path/to/image.jpg"
       
   twiml = Twilio::TwiML::Response.new do |resp|
-    r.Message do |m|
+    resp.Message do |m|
         m.Body message
         unless image_url.nil?
             m.Media image_url
