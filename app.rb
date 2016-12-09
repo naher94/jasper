@@ -56,6 +56,7 @@ get '/incoming_sms' do
   
   #message = decide_response( body )
   message = "I didn't get that. " + help
+  image_url = nil
   
   if body == "hi"
     message = get_greeting
@@ -70,6 +71,8 @@ get '/incoming_sms' do
   #which YES or NO is it? context aware use sessions to do this?
   if body == "yes"
     message = show_images
+    #image_url = get_image_url
+    image_url = "http://i.giphy.com/3o7TKQXXnn5fwgfHr2.gif"
   end
   
   if body == "no"
@@ -79,9 +82,18 @@ get '/incoming_sms' do
   if body == "help"
     message = help
   end
+
+  # image_url = nil 
+  # image_url = "http://rehansapp.heroku.com/path/to/image.jpg"
       
   twiml = Twilio::TwiML::Response.new do |resp|
-    resp.Message message
+    r.Message do |m|
+        m.Body message
+        unless image_url.nil?
+            m.Media image_url
+        end
+    end
+
   end
     
   return twiml.text
