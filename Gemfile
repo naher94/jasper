@@ -15,15 +15,15 @@ gem 'builder'
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'dotenv-rails'
 end
 
 group :production do
    gem 'pg'
 end
 
-gem 'dotenv-rails', :groups => [:development, :test]
 gem 'twilio-ruby'
-
+gem 'nokogiri'
 
 gem 'giphy'
 gem 'stock_quote'
