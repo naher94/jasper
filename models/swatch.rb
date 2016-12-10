@@ -48,6 +48,6 @@ class Swatch < ActiveRecord::Base
 	def self.load_pantone
 		pd = self.get_pantone_data
 		swatch = self.save_pantone_data(pd)
-		Image.load_image(pd)
+		Image.load_image( swatch.hex )
 	end
 end
