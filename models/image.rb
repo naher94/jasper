@@ -29,10 +29,9 @@ class Image < ActiveRecord::Base
 	  return image_hrefs.sample(4)
 	end
 
-	def self.load_image(data) #data is a swatch point
+	def self.load_image(hex) #data is a swatch point
 		#get hex from the lastest entry in the db
 		#pass it in as a n argument
-		hex = data.hex
 		self.save_image_data(self.get_dribbble_photos(hex))
 	end
 end
