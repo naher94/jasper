@@ -20,13 +20,14 @@ class Image < ActiveRecord::Base
 	  document = Nokogiri::HTML(open(url))
 
 	  images = document.css(".dribbble-link noscript img")
+	  puts images
 	  image_hrefs = Array.new
 
 	  images.each do | image |
 	    image_hrefs.push(image.attr('src').gsub('_teaser.','.'))
 	  end
 
-	  return image_hrefs.sample#(4)
+	  return image_hrefs.sample(4)
 	end
 
 	def self.load_image(hex) #data is a swatch point
