@@ -9,8 +9,6 @@ require 'open-uri'
 require 'nokogiri'
 require 'whenever'
 
-#set :environment, :development
-
 # Load environment variables using Dotenv. If a .env file exists, it will
 # set environment variables from that file (useful for dev environments)
 configure :development do
@@ -168,14 +166,12 @@ end
 # end
 
 def color_of_the_day #colorize
+  
   #JSON.load(s.themetic_words)
-  date = current date
   colorToday = Swatch.where( "DATE(date) = ?", Date.today)
-
-  #pull the data from the database
   #show an image of the color swatch
 
-  "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}"
+  "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{colorToday.themetic_words}"
 
   # "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for \'Powerful, Dynamic & Introspective\' " + "swatchPlaceHolder.png" + "Want images using canton?"
 end
@@ -189,7 +185,7 @@ def show_images_image
     #replace with images from the images table of that correct date
     #"http://i.giphy.com/3o7TKQXXnn5fwgfHr2.gif" + "https://media.giphy.com/media/l3vR9zT3ySDv5MKeQ/source.gif"
     
-    Image.where(date: params["date"]) #should return array? take the first 2
+    Image.where( "DATE(date) = ?", Date.today) #should return array? take the first 2
 end
 
 def no_images
@@ -198,6 +194,7 @@ end
 
 def history
   #pull up the last seven entries from db
+  "History Command"
 end
 
 def error
