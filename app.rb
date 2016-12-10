@@ -66,7 +66,7 @@ get '/incoming_sms' do
   if body == "color"
     message = color_of_the_day
   end
-  
+
   #should actually be any form of CONFIRMATIONS
   #which YES or NO is it? context aware use sessions to do this?
   if body == "yes"
@@ -133,7 +133,6 @@ private
   
 # end 
 
-
 CONFIRMATIONS = ["Yes","Yup","Totally","Totes","👍"]
 
 GREETINGS = ["Hi","Yo", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hola", "Bonjour", "Hallo", "Ciao", "Konnichiwa"]
@@ -170,24 +169,31 @@ end
 
 def color_of_the_day #colorize
   #JSON.load(s.themetic_words)
+  date = current date
+  colorToday = Swatch.where( "DATE(date) = ?", Date.today)
 
   #pull the data from the database
   #show an image of the color swatch
-  "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for \'Powerful, Dynamic & Introspective\' " + "swatchPlaceHolder.png" + "Want images using canton?"
+
+  "Today's color is colorToday.name colorToday.pantone colorToday.hex"
+
+  # "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for \'Powerful, Dynamic & Introspective\' " + "swatchPlaceHolder.png" + "Want images using canton?"
 end
 
 def show_images_message
   #create more than 1 greeting
-  ["Awesome Sauce! Give me a second.","#winning, one sec","Next stop inspiration 🚂"].sample
+  ["Awesome Sauce! Give me a second.","#winning, one sec","Next stop inspiration! 🚂"].sample
 end
 
 def show_images_image
     #replace with images from the images table of that correct date
-    "http://i.giphy.com/3o7TKQXXnn5fwgfHr2.gif" + "https://media.giphy.com/media/l3vR9zT3ySDv5MKeQ/source.gif"
+    #"http://i.giphy.com/3o7TKQXXnn5fwgfHr2.gif" + "https://media.giphy.com/media/l3vR9zT3ySDv5MKeQ/source.gif"
+    
+    Image.where(date: params["date"]) #should return array? take the first 2
 end
 
 def no_images
-  "👋 Sounds good. Let me know if you would like images later on I’ll be happy to provide them. Happy Coloring! Ever need me, just type “Help” or “Colorize” and I’ll be waiting."
+  "👋 Sounds good. Let me know if you would like images later on I’ll be happy to provide them. Happy Coloring! Ever need me, just type \"Help\" or \"Colorize\" and I’ll be waiting."
 end 
 
 def history
