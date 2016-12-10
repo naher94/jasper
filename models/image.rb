@@ -3,11 +3,10 @@ class Image < ActiveRecord::Base
 	belongs_to :swatch 
 	#has_many :images  
 	#validates_presence_of :url
-	def self.save_image_data(data, swatch)
+	def self.save_image_data(data)
 	  
 		for i in data.length
 			image = Image.new
-			image.swatch = swatch
 			#poulate
 			image.date = Time.now
 			image.image = data[i]
@@ -30,10 +29,10 @@ class Image < ActiveRecord::Base
 	  return image_hrefs.sample(4)
 	end
 
-	def self.load_image(data, swatch) #data is a swatch point
+	def self.load_image(data) #data is a swatch point
 		#get hex from the lastest entry in the db
 		#pass it in as a n argument
 		hex = data.hex
-		self.save_image_data(self.get_dribbble_photos(hex), swatch)
+		self.save_image_data(self.get_dribbble_photos(hex))
 	end
 end
