@@ -9,8 +9,6 @@ require 'open-uri'
 require 'nokogiri'
 require 'whenever'
 
-#set :environment, :development
-
 # Load environment variables using Dotenv. If a .env file exists, it will
 # set environment variables from that file (useful for dev environments)
 configure :development do
@@ -168,13 +166,12 @@ end
 # end
 
 def color_of_the_day #colorize
+  
   #JSON.load(s.themetic_words)
   colorToday = Swatch.where( "DATE(date) = ?", Date.today)
-
-  #pull the data from the database
   #show an image of the color swatch
 
-  "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}"
+  "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{colorToday.themetic_words}"
 
   # "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for \'Powerful, Dynamic & Introspective\' " + "swatchPlaceHolder.png" + "Want images using canton?"
 end
@@ -197,6 +194,7 @@ end
 
 def history
   #pull up the last seven entries from db
+  "History Command"
 end
 
 def error
