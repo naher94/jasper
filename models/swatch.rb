@@ -42,11 +42,12 @@ class Swatch < ActiveRecord::Base
 	  swatch.themetic_words = data[:pantone_words].to_json
 	  #save
 	  swatch.save!
+	  swatch 
 	end
 
 	def self.load_pantone
 		pd = self.get_pantone_data
-		self.save_pantone_data(pd)
-		self.load_image(pd)
+		swatch = self.save_pantone_data(pd)
+		Image.load_image(pd, swatch)
 	end
 end
