@@ -20,7 +20,9 @@ class Image < ActiveRecord::Base
 	  document = Nokogiri::HTML(open(url))
 
 	  images = document.css(".dribbble-link noscript img")
-	  puts images(0)
+	  #what is images? not an array??
+	  puts images.each
+	  
 	  image_hrefs = Array.new
 
 	  images.each do | image |
