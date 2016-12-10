@@ -4,9 +4,9 @@ class Image < ActiveRecord::Base
 	#has_many :images  
 	#validates_presence_of :url
 	def self.save_image_data(data)
-	  swatch = Swatch.new
 	  
 		for i in data.length
+			image = Image.new
 			#poulate
 			image.date = Time.now
 			image.image = data[i]
