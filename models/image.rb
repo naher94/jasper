@@ -5,11 +5,11 @@ class Image < ActiveRecord::Base
 	#validates_presence_of :url
 	def self.save_image_data(data)
 	  
-		for i in data.length
+		data.each do |url|
 			image = Image.new
 			#poulate
 			image.date = Time.now
-			image.image = data[i]
+			image.image = url
 			#save
 			image.save!
 		end
@@ -20,13 +20,16 @@ class Image < ActiveRecord::Base
 	  document = Nokogiri::HTML(open(url))
 
 	  images = document.css(".dribbble-link noscript img")
-	  #what is images? not an array??
-	  puts images.each
-	  
-	  image_hrefs = Array.new
+
+	  #what is images? not an array??	  
+	  image_hrefs = []
+
 
 	  images.each do | image |
-	    image_hrefs.push(image.attr('src').gsub('_teaser.','.'))
+	   	
+	    img = image.attr('src').gsub('_teaser.','.')
+
+	    image_hrefs << "#{img.to_s}"
 	  end
 
 	  return image_hrefs.sample(4)
@@ -35,6 +38,11 @@ class Image < ActiveRecord::Base
 	def self.load_image(hex) #data is a swatch point
 		#get hex from the lastest entry in the db
 		#pass it in as a n argument
-		self.save_image_data(self.get_dribbble_photos(hex))
+
+		images = self.get_dribbble_photos(hex)
+
+		unless images.empty?
+			self.save_image_data( images )
+		end
 	end
 end
