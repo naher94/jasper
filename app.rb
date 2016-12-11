@@ -55,6 +55,7 @@ get '/incoming_sms' do
   #message = decide_response( body )
   message = "I didn't get that. " + help
   image_url = nil
+  images = []
   
   if GREETINGS.include? body
     message = get_greeting
@@ -70,7 +71,7 @@ get '/incoming_sms' do
   if body == "yes"
     message = show_images_message
     #image_url = get_image_url
-    image_url = show_images_image
+    images = show_images_image
   end
 
   if body.include? "who"
@@ -97,6 +98,11 @@ get '/incoming_sms' do
         m.Body message
         unless image_url.nil?
             m.Media image_url
+        end
+        unless images.empty?
+          images.each do |image|
+            m.Media image.image
+          end
         end
     end
 
