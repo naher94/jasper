@@ -185,7 +185,7 @@ def show_images_image
     #replace with images from the images table of that correct date
     #"http://i.giphy.com/3o7TKQXXnn5fwgfHr2.gif" + "https://media.giphy.com/media/l3vR9zT3ySDv5MKeQ/source.gif"
     
-    Image.where( "DATE(date) = ?", Date.today) #should return array? take the first 2
+    Image.where( "DATE(date) = ?", Date.today).sample(2) #should return array? take the first 2
 end
 
 def no_images
