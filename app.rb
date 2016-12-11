@@ -168,7 +168,7 @@ end
 def color_of_the_day #colorize
   
   #JSON.load(s.themetic_words)
-  colorToday = Swatch.where( "DATE(date) = ?", Date.today)
+  colorToday = Swatch.where( "DATE(date) = ?", Date.today).first
   #show an image of the color swatch
 
   "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{colorToday.themetic_words}"
