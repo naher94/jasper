@@ -150,7 +150,7 @@ def get_greeting
 end
 
 def get_about_message
-  get_greeting + ", I\'m Jasper, your little color 🎨 helper! " + get_commands
+  get_greeting + ", I\'m Jasper, your little color 🎨 helper! To help expand your color vocabulary and provide a new form of inspiration"
 end
 
 # def get_help_message
@@ -160,12 +160,6 @@ end
 def help
   "I\'m pretty helpful at finding images for the color of the day and giving you the color of the day just type \"colorize\" to get today’s color and \"images\" to pull up images that use today's color 🎉"
 end
-
-
-# def color_of_the_day
-#   #JSON.load(s.themetic_words)
-#   "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for \'Powerful, Dynamic & Introspective\' " + "swatchPlaceHolder.png" + "Want images using canton?"
-# end
 
 def color_of_the_day #colorize
 
