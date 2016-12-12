@@ -57,7 +57,7 @@ get '/incoming_sms' do
   image_url = nil
   images = []
   
-  if GREETINGS.include? body
+  if GREETINGS.downcase.include? body
     message = get_greeting
     image_url = "http://rehanbutt.com/img/colorBot/jasper.png"
   end
@@ -140,7 +140,7 @@ private
 
 CONFIRMATIONS = ["Yes","Yup","Totally","Totes","👍"]
 
-GREETINGS = ["hi","yo", "hey","howdy", "hello", "ahoy", "‘ello", "aloha", "hola", "bonjour", "hallo", "ciao", "konnichiwa"]
+GREETINGS = ["Hi","Yo", "hey","howdy", "hello", "ahoy", "‘ello", "aloha", "hola", "bonjour", "hallo", "ciao", "konnichiwa"]
 
 COMMANDS = "hi, who, what, where, when, why and play."
 
