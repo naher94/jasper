@@ -94,6 +94,10 @@ get '/incoming_sms' do
     message = your_welcome
   end
 
+  if body.include? "more images"
+    message = more_images
+  end
+
   # image_url = nil 
   # image_url = "http://rehansapp.heroku.com/path/to/image.jpg"
       
@@ -137,7 +141,7 @@ def get_commands
 end
 
 def get_greeting
-  return GREETINGS.sample + " I'm Jasper your friendly neighborhood color " + TITLES.sample + " 🎨, pleased to meet you!" + "Want to be colorized? just say \'colorize\'"
+  return GREETINGS.sample + " I'm Jasper your friendly neighborhood color " + TITLES.sample + " 🎨, pleased to meet you!" + " Want to be colorized? just say \'colorize\' Not sure what that means, no worries just give it a shot its pretty fun 😆"
 end
 
 def get_about_message
@@ -178,12 +182,16 @@ def show_images_image
 end
 
 def your_welcome
-    return ["Your welcome", "Of course", "For sure", "You are very welcome"].sample + " Happy coloring!"#" let me know if you need any other color inspiration. I'll be here!"
+    return ["Your welcome", "Of course", "For sure", "You are very welcome"].sample + " Happy coloring! 🎨🎉"#" let me know if you need any other color inspiration. I'll be here!"
 end
 
 def no_images
   "👋 Sounds good. Let me know if you would like images later on I’ll be happy to provide them. Happy Coloring! Ever need me, just type \"Help\" or \"Colorize\" and I’ll be waiting."
 end 
+
+def more_images
+  Image.where( "DATE(date) = ?", Date.today).last(2)
+end
 
 # def history
 #   #pull up the last seven entries from db
