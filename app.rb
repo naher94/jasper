@@ -59,6 +59,7 @@ get '/incoming_sms' do
   
   if GREETINGS.include? body
     message = get_greeting
+    image_url = "http://rehanbutt.com/img/colorBot/jasper.png"
   end
 
   # how do i make this time based? rather than the user asking for it??
@@ -82,11 +83,11 @@ get '/incoming_sms' do
     message = no_images 
   end
 
-  if body == "help"
+  if body.include? "help"
     message = help
   end
 
-  if body == "colorize"
+  if body.include? "colorize"
     message = color_of_the_day
   end
 
@@ -143,6 +144,8 @@ GREETINGS = ["Hi","Yo", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hol
 
 COMMANDS = "hi, who, what, where, when, why and play."
 
+TITLES = ["master", "sensei", "wrangler", "doctor", "guru", "wizard", "professional"]
+
 def get_commands
   error_prompt = ["I know how to: ", "You can say: ", "Try asking: "].sample
   
@@ -150,7 +153,7 @@ def get_commands
 end
 
 def get_greeting
-  return GREETINGS.sample
+  return GREETINGS.sample + "I'm Jasper your friendly neighborhood color " + TITLES.sample
 end
 
 def get_about_message
