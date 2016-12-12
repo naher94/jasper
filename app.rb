@@ -67,9 +67,8 @@ get '/incoming_sms' do
     message = color_of_the_day
   end
 
-  #should actually be any form of CONFIRMATIONS
   #which YES or NO is it? context aware use sessions to do this?
-  if body == "yes"
+  if body.include? == "images"
     message = show_images_message
     #image_url = get_image_url
     images = show_images_image
@@ -89,6 +88,10 @@ get '/incoming_sms' do
 
   if body.include? "colorize"
     message = color_of_the_day
+  end
+
+  if body.include? "thanks"
+    message = your_welcome
   end
 
   # image_url = nil 
@@ -146,7 +149,7 @@ end
 # end
 
 def help
-  "I\'m pretty helpful at finding images for the color of the day and giving you the color of the day just type \"colorize\" to get today’s color and “history” to pull up colors from this past week :woot: :woot:"
+  "I\'m pretty helpful at finding images for the color of the day and giving you the color of the day just type \"colorize\" to get today’s color and \"images\" to pull up images that use today's color 🎉"
 end
 
 
@@ -159,7 +162,7 @@ def color_of_the_day #colorize
 
   colorToday = Swatch.where( "DATE(date) = ?", Date.today).first
   #show an image of the color swatch
-
+  puts colorToday.thematic_words.class
   "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{colorToday.themetic_words}"
 
   # "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for \'Powerful, Dynamic & Introspective\' " + "swatchPlaceHolder.png" + "Want images using canton?"
@@ -175,6 +178,10 @@ def show_images_image
     #"http://i.giphy.com/3o7TKQXXnn5fwgfHr2.gif" + "https://media.giphy.com/media/l3vR9zT3ySDv5MKeQ/source.gif"
     
     Image.where( "DATE(date) = ?", Date.today).first(2) #should return array? take the first 2
+end
+
+def your_welcome
+    return ["Your welcome", "Of course", "For sure"].sample + " let me know if you need any other color inspiration. I'll be here!"
 end
 
 def no_images
