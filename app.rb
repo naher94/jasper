@@ -161,7 +161,7 @@ def color_of_the_day #colorize
   colorToday = Swatch.where( "DATE(date) = ?", Date.today).first
   #show an image of the color swatch
 
-  "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{colorToday.themetic_words.first(3)}"
+  "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{colorToday.themetic_words[0]}"
 
   # "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for \'Powerful, Dynamic & Introspective\' " + "swatchPlaceHolder.png" + "Want images using canton?"
 end
