@@ -67,7 +67,6 @@ get '/incoming_sms' do
     message = color_of_the_day
   end
 
-  #which YES or NO is it? context aware use sessions to do this?
   if body.include? "images"
     message = show_images_message
     #image_url = get_image_url
