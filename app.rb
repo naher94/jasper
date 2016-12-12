@@ -153,7 +153,7 @@ def get_commands
 end
 
 def get_greeting
-  return GREETINGS.sample + "I'm Jasper your friendly neighborhood color " + TITLES.sample
+  return GREETINGS.sample + " I'm Jasper your friendly neighborhood color " + TITLES.sample + " 🎨, pleased to meet you!"
 end
 
 def get_about_message
