@@ -162,8 +162,8 @@ def color_of_the_day #colorize
 
   colorToday = Swatch.where( "DATE(date) = ?", Date.today).first
   #show an image of the color swatch
-  puts colorToday.themetic_words.class
-  "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{colorToday.themetic_words}"
+  words = JSON.load(colorToday.themetic_words)
+  "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{words[0]}"
 
   # "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for \'Powerful, Dynamic & Introspective\' " + "swatchPlaceHolder.png" + "Want images using canton?"
 end
@@ -188,13 +188,14 @@ def no_images
   "👋 Sounds good. Let me know if you would like images later on I’ll be happy to provide them. Happy Coloring! Ever need me, just type \"Help\" or \"Colorize\" and I’ll be waiting."
 end 
 
-def history
-  #pull up the last seven entries from db
-  "History Command"
-end
+# def history
+#   #pull up the last seven entries from db
+#   "History Command"
+# end
 
 def error
-  "Sorry I don't understand what you mean, type \"help\" for help."
+  error_prompt = ["I didn't catch that.", "Hmmm I don't know that word.", "What did you say to me?", "Sorry I don't understand what you mean."].sample
+  return error_prompt + " " + help
   
 end
 
