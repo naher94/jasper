@@ -94,7 +94,7 @@ get '/incoming_sms' do
   end
 
   if body.include? "more"
-    message = show_images_message
+    message = show_images_message #somethign jank here??
     images = more_images
   end
 
