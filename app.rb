@@ -57,7 +57,7 @@ get '/incoming_sms' do
   image_url = nil
   images = []
   
-  if GREETINGS.downcase.include? body
+  if GREETINGS.include? body
     message = get_greeting
     image_url = "http://rehanbutt.com/img/colorBot/jasper.png"
   end
@@ -117,34 +117,15 @@ end
 #   Add any custom methods below
 # ----------------------------------------------------------------------
 
-private 
-
-
-#This might be a good idea to have!!!!!!!!!
-
-# def decide_response blob
-  
-#   #return "I didn't understand"
-  
-#   if blob == "skills"
-#     "My skills are  x , y , z "
-#   elsif blob == "availability"  
-#     "I'm available for hire now"
-#   elsif blob == "something else "  
-#     "Something else"
-#   else
-#     return "I didn't understand"
-#   end 
-  
-# end 
+private
 
 CONFIRMATIONS = ["Yes","Yup","Totally","Totes","👍"]
 
-GREETINGS = ["Hi","Yo", "hey","howdy", "hello", "ahoy", "‘ello", "aloha", "hola", "bonjour", "hallo", "ciao", "konnichiwa"]
+GREETINGS = ["hi","yo", "hey","howdy", "hello", "ahoy", "‘ello", "aloha", "hola", "bonjour", "hallo", "ciao", "konnichiwa"]
 
 COMMANDS = "hi, who, what, where, when, why and play."
 
-TITLES = ["master", "sensei", "wrangler", "doctor", "guru", "wizard", "professional"]
+TITLES = ["master", "sensei", "ninja", "wrangler", "doctor", "guru", "wizard", "professional"]
 
 def get_commands
   error_prompt = ["I know how to: ", "You can say: ", "Try asking: "].sample
@@ -180,7 +161,7 @@ def color_of_the_day #colorize
   colorToday = Swatch.where( "DATE(date) = ?", Date.today).first
   #show an image of the color swatch
 
-  "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{colorToday.themetic_words}"
+  "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{colorToday.themetic_words.first(3)}"
 
   # "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for \'Powerful, Dynamic & Introspective\' " + "swatchPlaceHolder.png" + "Want images using canton?"
 end
