@@ -93,7 +93,7 @@ get '/incoming_sms' do
     message = your_welcome
   end
 
-  if body.include? "more images"
+  if body.include? "more"
     message = more_images
   end
 
