@@ -157,7 +157,7 @@ end
 
 def color_of_the_day #colorize
   
-  words = colorToday.themetic_words.downcase
+  words = colorToday.themetic_words
   #words = JSON.load(colorToday.themetic_words)
   colorToday = Swatch.where( "DATE(date) = ?", Date.today).first
   #show an image of the color swatch
