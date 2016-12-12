@@ -68,7 +68,7 @@ get '/incoming_sms' do
   end
 
   #which YES or NO is it? context aware use sessions to do this?
-  if body.include? == "images"
+  if body.include? "images"
     message = show_images_message
     #image_url = get_image_url
     images = show_images_image
@@ -181,7 +181,7 @@ def show_images_image
 end
 
 def your_welcome
-    return ["Your welcome", "Of course", "For sure"].sample + " let me know if you need any other color inspiration. I'll be here!"
+    return ["Your welcome", "Of course", "For sure", "You are very welcome"].sample + " Happy coloring!"#" let me know if you need any other color inspiration. I'll be here!"
 end
 
 def no_images
