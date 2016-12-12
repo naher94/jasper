@@ -94,7 +94,12 @@ get '/incoming_sms' do
   end
 
   if body.include? "more"
-    message = more_images
+    images = more_images
+  end
+
+  if body.include? "yesterday"
+    message = yesterday_color_text
+    images = yesterday_color_images
   end
 
   # image_url = nil 
@@ -192,6 +197,15 @@ def more_images
   Image.where( "DATE(date) = ?", Date.today).last(2)
 end
 
+def yesterday_color_text
+  colorYesterday = Swatch.where( "DATE(date) = ?", Date.today.prev_day).first
+  "Yesterday's color was #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{words[0].downcase}, #{words[1].downcase}, #{words[2].downcase}"
+
+end
+
+def yesterday_color_images
+  Image.where( "DATE(date) = ?", Date.today.prev_day).last(2)
+end
 # def history
 #   #pull up the last seven entries from db
 #   "History Command"
