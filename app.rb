@@ -140,7 +140,7 @@ private
 
 CONFIRMATIONS = ["Yes","Yup","Totally","Totes","👍"]
 
-GREETINGS = ["Hi","Yo", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hola", "Bonjour", "Hallo", "Ciao", "Konnichiwa"]
+GREETINGS = ["hi","yo", "hey","howdy", "hello", "ahoy", "‘ello", "aloha", "hola", "bonjour", "hallo", "ciao", "konnichiwa"]
 
 COMMANDS = "hi, who, what, where, when, why and play."
 
