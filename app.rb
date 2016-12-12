@@ -94,6 +94,7 @@ get '/incoming_sms' do
   end
 
   if body.include? "more"
+    message = show_images_message #somethign jank here??
     images = more_images
   end
 
@@ -199,7 +200,8 @@ end
 
 def yesterday_color_text
   colorYesterday = Swatch.where( "DATE(date) = ?", Date.today.prev_day).first
-  "Yesterday's color was #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{words[0].downcase}, #{words[1].downcase}, #{words[2].downcase}"
+  words = JSON.load(colorYesterday.themetic_words)
+  "Yesterday's color was #{colorYesterday.name} #{colorYesterday.pantone} #{colorYesterday.hex}, which stands for #{words[0].downcase}, #{words[1].downcase}, #{words[2].downcase}"
 
 end
 
