@@ -163,8 +163,7 @@ def color_of_the_day #colorize
   colorToday = Swatch.where( "DATE(date) = ?", Date.today).first
   #show an image of the color swatch
   words = JSON.load(colorToday.themetic_words)
-  "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{words[0].downcase} , #{words[1].downcase} , #{words[2].downcase}"
-
+  "Today's color is #{colorToday.name} #{colorToday.pantone} #{colorToday.hex}, which stands for #{words[0].downcase}, #{words[1].downcase}, #{words[2].downcase}"
   # "Pantone's color of the day is Canton (16-5112) #6CA3A1, which stands for \'Powerful, Dynamic & Introspective\' " + "swatchPlaceHolder.png" + "Want images using canton?"
 end
 
@@ -174,10 +173,8 @@ def show_images_message
 end
 
 def show_images_image
-    #replace with images from the images table of that correct date
-    #"http://i.giphy.com/3o7TKQXXnn5fwgfHr2.gif" + "https://media.giphy.com/media/l3vR9zT3ySDv5MKeQ/source.gif"
-    
-    Image.where( "DATE(date) = ?", Date.today).first(2) #should return array? take the first 2
+    #replace with images from the images table of that correct date    
+    Image.where( "DATE(date) = ?", Date.today).first(2)
 end
 
 def your_welcome
