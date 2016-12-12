@@ -94,6 +94,10 @@ get '/incoming_sms' do
     message = your_welcome
   end
 
+  if body.include? "more images"
+    message = more_images
+  end
+
   # image_url = nil 
   # image_url = "http://rehansapp.heroku.com/path/to/image.jpg"
       
@@ -186,7 +190,7 @@ def no_images
 end 
 
 def more_images
-  Image.where( "DATE(date) = ?", Date.today).first(2)
+  Image.where( "DATE(date) = ?", Date.today).last(2)
 end
 
 # def history
