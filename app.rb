@@ -94,7 +94,7 @@ get '/incoming_sms' do
   end
 
   if body.include? "more"
-    message = show_images_message
+    message = show_images_message #push the message first?
     images = more_images
   end
 
@@ -150,7 +150,7 @@ def get_greeting
 end
 
 def get_about_message
-  get_greeting + ", I\'m Jasper, your little color 🎨 helper! To help expand your color vocabulary and provide a new form of inspiration"
+  GREETINGS.sample + ", I\'m Jasper, your little color 🎨 helper! To help expand your color vocabulary and provide a new form of inspiration"
 end
 
 # def get_help_message
